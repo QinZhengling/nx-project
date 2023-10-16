@@ -1,0 +1,132 @@
+<button nz-button nzType="primary" (click)="showModal('Add', sendInfo)">
+  <span>Add 设备维修记录</span>
+</button>
+<nz-modal
+  [(nzVisible)]="isVisible"
+  [nzTitle]="ModalTitle"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk(sendInfo)"
+  [nzOkLoading]="isOkLoading"
+>
+  <div *nzModalContent>
+    <div *ngIf="ModalTitle === 'Delete' ? true : false">
+      是否要删除设备名为{{ sendInfo.e_name }},ID为{{ sendInfo.e_id }}的维修信息
+    </div>
+    <div *ngIf="ModalTitle === 'Edit' ? true : false" class="sendInfo">
+      <input type="text" [(ngModel)]="sendInfo.e_id" placeholder="设备ID" />
+      <input type="text" [(ngModel)]="sendInfo.e_name" placeholder="设备名称" />
+      <input type="text" [(ngModel)]="sendInfo.m_info" placeholder="维修信息" />
+      <input
+        type="text"
+        [(ngModel)]="sendInfo.create_user"
+        placeholder="维修人员"
+      />
+      <nz-date-picker
+        [(ngModel)]="sendInfo.m_time"
+        nzFormat="yyyy-MM-dd"
+        class="date-picker"
+        [nzPlaceHolder]="'维修时间'"
+      ></nz-date-picker>
+      <span>维修时间</span>
+    </div>
+    <div *ngIf="ModalTitle === 'Add' ? true : false" class="sendInfo">
+      <input type="text" [(ngModel)]="addInfo.e_id" placeholder="设备ID" />
+      <input type="text" [(ngModel)]="addInfo.e_name" placeholder="设备名称" />
+      <input type="text" [(ngModel)]="addInfo.m_info" placeholder="维修信息" />
+      <input
+        type="text"
+        [(ngModel)]="addInfo.create_user"
+        placeholder="维修人员"
+      />
+      <nz-date-picker
+        [(ngModel)]="addInfo.m_time"
+        nzFormat="yyyy-MM-dd"
+        class="date-picker"
+        [nzPlaceHolder]="'维修时间'"
+      ></nz-date-picker>
+    </div>
+  </div>
+</nz-modal>
+<nz-table
+  #nzdata
+  [nzData]="listOfDisplayData"
+  class="Table"
+  [nzSize]="'default'"
+  [nzPaginationType]="'small'"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzPageIndex]="PageIndex"
+  [nzPageSize]="PageSize"
+  [nzFrontPagination]="false"
+  (nzPageIndexChange)="changePageIndex($event)"
+>
+  <thead>
+    <tr>
+      <th nzCustomFilter class="cth">
+        设备名称
+        <nz-filter-trigger
+          [(nzVisible)]="visible"
+          [nzActive]="searchValue.length > 0"
+          [nzDropdownMenu]="menu"
+        >
+          <span nz-icon nzType="search" class="searchIcon"></span>
+        </nz-filter-trigger>
+      </th>
+      <th class="cth">设备ID</th>
+      <th class="cth">维修信息</th>
+      <th class="cth">维修时间</th>
+      <th class="cth">维修人员</th>
+      <th class="cth" [nzAlign]="'center'">相关操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of nzdata.data">
+      <td>{{ data.e_name }}</td>
+      <td>{{ data.e_id }}</td>
+      <td>{{ data.m_info }}</td>
+      <td>{{ data.m_time }}</td>
+      <td>{{ data.create_user }}</td>
+      <td [nzAlign]="'center'">
+        <button
+          class="delete"
+          nz-button
+          nzType="primary"
+          (click)="showModal('Delete', data)"
+        >
+          Delete
+        </button>
+
+        <button
+          class="update"
+          nz-button
+          nzType="primary"
+          (click)="showModal('Edit', data)"
+        >
+          Update
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input
+        type="text"
+        nz-input
+        placeholder="Search name"
+        [(ngModel)]="searchValue"
+      />
+      <button
+        nz-button
+        nzSize="small"
+        nzType="primary"
+        (click)="search()"
+        class="search-button"
+      >
+        Search
+      </button>
+      <button nz-button nzSize="small" (click)="reset()">Reset</button>
+    </div>
+  </div>
+</nz-dropdown-menu>

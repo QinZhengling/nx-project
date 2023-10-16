@@ -1,0 +1,90 @@
+<!-- <div class="bg">
+  <div class="sidebar">
+    <div class="users" routerLink="/manage/users">
+      <img src="../../assets/users.svg" alt="" /> <span>用户管理</span>
+    </div>
+    <div class="equipment" routerLink="/manage/euipment">
+      <img src="../../assets//equipment.svg" alt="" /><span>设备管理</span>
+    </div>
+    <div class="equipment2" routerLink="/manage/euipment_maintance">
+      <img src="../../assets/equipment2.svg" alt="" /><span
+        >设备维修记录管理</span
+      >
+    </div>
+    <div class="log" routerLink="/">
+      <img src="../../assets/log.svg" alt="" /><span>Log</span>
+    </div>
+  </div>
+  <div class="head">
+    <div>
+      <img src="../../assets/allUser.svg" alt="" /><span>123</span>
+      <p>全部User</p>
+    </div>
+    <div>
+      <img src="../../assets/allequipment.svg" alt="" /><span>123</span>
+      <p>全部User</p>
+    </div>
+    <div>
+      <img src="../../assets/allequipmentm.svg" alt="" /><span>123</span>
+      <p>全部User</p>
+    </div>
+    <div>
+      <img src="../../assets/allLog.svg" alt="" /><span>123</span>
+      <p>全部User</p>
+    </div>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div> -->
+<div class="manageBody">
+  <span class="title">Management</span>
+  <div class="search">
+    <img src="../../assets/search.svg" /><input
+      type="text"
+      placeholder="Search"
+    />
+  </div>
+  <div class="sidebar">
+    <div [ngClass]="{ active: isActive1 }" (click)="toggleClick(1)">
+      <img [src]="img1" /><span>用户管理</span>
+    </div>
+    <div [ngClass]="{ active: isActive2 }" (click)="toggleClick(2)">
+      <img [src]="img2" /><span>设备管理</span>
+    </div>
+    <div [ngClass]="{ active: isActive3 }" (click)="toggleClick(3)">
+      <img [src]="img3" /><span>设备维修记录管理</span>
+    </div>
+    <div [ngClass]="{ active: isActive5 }" (click)="toggleClick(5)">
+      <img [src]="img5" /><span>权限管理</span>
+    </div>
+    <div [ngClass]="{ active: isActive4 }" (click)="toggleClick(4)">
+      <img [src]="img4" /><span>日志记录</span>
+    </div>
+  </div>
+  <div class="dashboard">
+    <div>
+      <img src="../../assets/allUser.svg" alt="" />
+      <p>{{ allUsers }}</p>
+      <span>全部用户</span>
+    </div>
+    <div>
+      <img src="../../assets/allequipment.svg" alt="" />
+      <p>{{ allEquipments }}</p>
+      <span>全部设备</span>
+    </div>
+    <div>
+      <img src="../../assets/allequipmentm.svg" alt="" />
+      <p>{{ allMaintenances }}</p>
+      <span>全部设备维修记录</span>
+    </div>
+    <div>
+      <img src="../../assets/allLog.svg" alt="" />
+      <p>{{ allLog }}</p>
+      <span>全部日志</span>
+    </div>
+  </div>
+  <div class="content">
+    <router-outlet class="router-outlet"></router-outlet>
+  </div>
+</div>

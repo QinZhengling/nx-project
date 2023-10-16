@@ -1,0 +1,63 @@
+<div class="body">
+  <div class="bg">
+    <input
+      type="text"
+      id="username"
+      [(ngModel)]="register.username"
+      placeholder="UserName"
+      required
+    />
+    <input
+      type="text"
+      id="account"
+      [(ngModel)]="register.account"
+      placeholder="UserAccount"
+      required
+    />
+    <input
+      type="password"
+      id="password"
+      [(ngModel)]="register.password"
+      placeholder="Password"
+      required
+    />
+    <input
+      type="password"
+      id="password2"
+      [(ngModel)]="password2"
+      placeholder="PasswordAgain"
+      required
+    />
+    <input
+      type="number"
+      id="age"
+      [(ngModel)]="register.age"
+      placeholder="age"
+      required
+    />
+
+    <div class="select">
+      <mat-form-field style="width: 100%">
+        <mat-label
+          style="font-family: alimama; font-size: 16px; font-weight: 400"
+          >Sex</mat-label
+        >
+        <mat-select
+          [(ngModel)]="register.sex"
+          style="font-family: alimama; font-size: 16px; font-weight: 400"
+        >
+          <mat-option
+            *ngFor="let sex of sexs"
+            [value]="sex"
+            style="font-family: alimama; font-size: 16px; font-weight: 400"
+          >
+            {{ sex === 0 ? '男' : '女' }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <button class="bt" (click)="Register()">
+      <span>Register</span>
+    </button>
+  </div>
+</div>

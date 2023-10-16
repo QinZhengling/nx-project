@@ -1,0 +1,193 @@
+<nz-modal
+  [(nzVisible)]="isRole"
+  (nzTitle)="(title)"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzOkLoading]="isOkLoading"
+>
+  <div *nzModalContent>
+    <div *ngIf="title === 'Delete' ? true : false">
+      是否要删除{{ content }}该权限
+    </div>
+    <div *ngIf="title === 'Update' ? true : false">
+      是否要更新{{ content }}该权限
+      <input type="text" placeholder="权限" [(ngModel)]="updateContent" />
+    </div>
+    <div *ngIf="title === 'Add' ? true : false">
+      <input type="number" placeholder="权限ID" [(ngModel)]="addRole.role_id" />
+      <input type="text" placeholder="权限" [(ngModel)]="addRole.role_name" />
+    </div>
+  </div>
+</nz-modal>
+<div class="role">
+  <span>现有权限</span>
+  <div class="Box">
+    <div *ngFor="let item of roles" class="roleBox">
+      <button
+        class="delete"
+        nz-button
+        nzType="primary"
+        (click)="showModalRole('Delete', item)"
+      >
+        删除
+      </button>
+      {{ item.role_name }}
+      <button
+        class="update"
+        nz-button
+        nzType="primary"
+        (click)="showModalRole('Update', item)"
+      >
+        更新
+      </button>
+    </div>
+  </div>
+  <div class="button">
+    <button (click)="showModalRole('Add', addRole)">Add</button>
+  </div>
+</div>
+<!-- 表格 -->
+<button nz-button nzType="primary" (click)="showModal('Add', sendInfo)">
+  <span>Add UserRole</span>
+</button>
+<nz-modal
+  [(nzVisible)]="isVisible"
+  [nzTitle]="userTitle"
+  (nzOnCancel)="UserCancel()"
+  (nzOnOk)="UserOk()"
+  [nzOkLoading]="isOkLoading"
+>
+  <div *nzModalContent>
+    <div *ngIf="userTitle === 'Delete' ? true : false">
+      是否要删除账号为{{ sendInfo.user_id }}
+    </div>
+    <div *ngIf="userTitle === 'Update' ? true : false" class="sendInfo">
+      <div class="select">
+        <mat-form-field style="width: 100%">
+          <mat-label
+            style="font-family: alimama; font-size: 16px; font-weight: 400"
+            >Role</mat-label
+          >
+          <mat-select
+            [(ngModel)]="sendInfo.role_id"
+            style="font-family: alimama; font-size: 16px; font-weight: 400"
+          >
+            <mat-option
+              *ngFor="let role of roles"
+              [value]="role.role_id"
+              style="font-family: alimama; font-size: 16px; font-weight: 400"
+            >
+              {{ role.role_name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div *ngIf="userTitle === 'Add' ? true : false" class="sendInfo">
+      <input type="text" [(ngModel)]="addInfo.user_id" placeholder="account" />
+      <div class="select">
+        <mat-form-field style="width: 100%">
+          <mat-label
+            style="font-family: alimama; font-size: 16px; font-weight: 400"
+            >Role</mat-label
+          >
+          <mat-select
+            [(ngModel)]="addInfo.role_id"
+            style="font-family: alimama; font-size: 16px; font-weight: 400"
+          >
+            <mat-option
+              *ngFor="let role of roles"
+              [value]="role.role_id"
+              style="font-family: alimama; font-size: 16px; font-weight: 400"
+            >
+              {{ role.role_name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</nz-modal>
+<nz-table
+  #nzdata
+  [nzData]="listOfDisplayData"
+  class="Table"
+  [nzSize]="'default'"
+  [nzPaginationType]="'small'"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzPageIndex]="PageIndex"
+  [nzPageSize]="PageSize"
+  [nzFrontPagination]="false"
+  (nzPageIndexChange)="changePageIndex($event)"
+>
+  <thead>
+    <tr>
+      <th nzCustomFilter class="cth" [nzAlign]="'center'" [nzWidth]="'33%'">
+        用户账户
+      </th>
+      <th class="cth" [nzAlign]="'center'" [nzWidth]="'33%'">权限</th>
+      <th class="cth" [nzAlign]="'center'" [nzWidth]="'33%'">相关操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of nzdata.data">
+      <td [nzAlign]="'center'">{{ user.user_id }}</td>
+      <td [nzAlign]="'center'" *ngIf="user.role_id === 1 ? true : false">
+        普通用户
+      </td>
+      <td [nzAlign]="'center'" *ngIf="user.role_id === 2 ? true : false">
+        管理员
+      </td>
+      <td [nzAlign]="'center'" *ngIf="user.role_id === 3 ? true : false">
+        Sup管理员
+      </td>
+
+      <!-- <td [nzAlign]="'center'">
+        {{ user.role_id === 1 ? '普通用户' : '管理员' }}
+      </td> -->
+      <td [nzAlign]="'center'">
+        <button
+          class="delete"
+          nz-button
+          nzType="primary"
+          (click)="showModal('Delete', user)"
+        >
+          Delete
+        </button>
+
+        <button
+          class="update"
+          nz-button
+          nzType="primary"
+          (click)="showModal('Update', user)"
+        >
+          Update
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+
+<!-- <nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input
+        type="text"
+        nz-input
+        placeholder="Search name"
+        [(ngModel)]="searchValue"
+      />
+      <button
+        nz-button
+        nzSize="small"
+        nzType="primary"
+        (click)="search()"
+        class="search-button"
+      >
+        Search
+      </button>
+      <button nz-button nzSize="small" (click)="reset()">Reset</button>
+    </div>
+  </div>
+</nz-dropdown-menu> -->

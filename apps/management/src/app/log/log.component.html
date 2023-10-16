@@ -1,0 +1,113 @@
+<button nz-button nzType="primary" (click)="change()">
+  <span>Change Log</span>
+</button>
+<div class="log">{{ log }}</div>
+<nz-table
+  *ngIf="log === 'userLogs' ? false : true"
+  #nzdata
+  title="equipmentLogs"
+  [nzData]="listOfEquipmentData"
+  class="Table"
+  [nzSize]="'default'"
+  [nzLoading]="loadingE"
+  [nzTotal]="total"
+  [nzPageIndex]="PageIndex"
+  [nzPageSize]="PageSize"
+  [nzFrontPagination]="false"
+  (nzPageIndexChange)="changePageIndex($event)"
+>
+  <thead>
+    <tr>
+      <th nzCustomFilter class="cth">
+        设备ID
+        <nz-filter-trigger
+          [(nzVisible)]="visible"
+          [nzActive]="searchValue.length > 0"
+          [nzDropdownMenu]="menu"
+        >
+          <span nz-icon nzType="search" class="searchIcon"></span>
+        </nz-filter-trigger>
+      </th>
+      <th class="cth">设备名字</th>
+      <th class="cth">设备型号</th>
+      <th class="cth">日志记录</th>
+      <th class="cth">创建时间</th>
+      <th class="cth">创建者</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of nzdata.data">
+      <td>{{ data.e_id }}</td>
+      <td>{{ data.e_name }}</td>
+      <td>{{ data.e_type }}</td>
+      <td>{{ data.e_do }}</td>
+      <td>{{ data.create_time }}</td>
+      <td>{{ data.create_user }}</td>
+    </tr>
+  </tbody>
+</nz-table>
+
+<nz-table
+  title="userLogs"
+  *ngIf="log === 'userLogs' ? true : false"
+  #nzdata
+  [nzData]="ListofUserData"
+  class="Table"
+  [nzSize]="'default'"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzPageIndex]="PageIndex"
+  [nzPageSize]="PageSize"
+  [nzFrontPagination]="false"
+  (nzPageIndexChange)="changePageIndex($event)"
+>
+  <thead>
+    <tr>
+      <th nzCustomFilter class="cth">
+        用户名
+        <nz-filter-trigger
+          [(nzVisible)]="visible"
+          [nzActive]="searchValue.length > 0"
+          [nzDropdownMenu]="menu"
+        >
+          <span nz-icon nzType="search" class="searchIcon"></span>
+        </nz-filter-trigger>
+      </th>
+      <th class="cth">用户账号</th>
+      <th class="cth">日志记录</th>
+      <th class="cth">创建时间</th>
+      <th class="cth">创建人</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of nzdata.data">
+      <td>{{ data.username }}</td>
+      <td>{{ data.account }}</td>
+      <td>{{ data.u_do }}</td>
+      <td>{{ data.create_time }}</td>
+      <td>{{ data.create_user }}</td>
+    </tr>
+  </tbody>
+</nz-table>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input
+        type="text"
+        nz-input
+        placeholder="Search name"
+        [(ngModel)]="searchValue"
+      />
+      <button
+        nz-button
+        nzSize="small"
+        nzType="primary"
+        (click)="search()"
+        class="search-button"
+      >
+        Search
+      </button>
+      <button nz-button nzSize="small" (click)="reset()">Reset</button>
+    </div>
+  </div>
+</nz-dropdown-menu>

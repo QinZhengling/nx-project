@@ -1,0 +1,138 @@
+.role {
+  width: 100%;
+  height: 100px;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.Box {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  z-index: 9;
+}
+.role .Box .roleBox {
+  margin-left: 20px;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 60px;
+}
+.button button {
+  position: relative;
+  z-index: 9;
+  width: 100px;
+  margin-left: 20px;
+  margin-right: 5px;
+}
+.Box .roleBox .update {
+  color: aliceblue;
+  border-radius: 12px;
+  z-index: 9;
+  width: 90px;
+  height: 40px;
+  background-color: #2f80ed;
+  border: none;
+}
+.Box .roleBox .delete {
+  color: aliceblue;
+  border-radius: 12px;
+  z-index: 9;
+  width: 90px;
+  height: 40px;
+  background-color: #ed556a;
+  border: none;
+}
+tbody tr td {
+  height: 10px;
+  font-size: 18px;
+  padding-left: 40px;
+}
+tbody tr td .delete {
+  color: aliceblue;
+  border-radius: 12px;
+  z-index: 9;
+  width: 90px;
+  height: 40px;
+  background-color: #ed556a;
+}
+tbody tr td .update {
+  margin-left: 20px;
+  color: aliceblue;
+  border-radius: 12px;
+  z-index: 9;
+  width: 90px;
+  height: 40px;
+  background-color: #2f80ed;
+}
+.sendInfo input {
+  width: 300px;
+  height: 50px;
+  padding-left: 10px;
+  border: none;
+  border-radius: 6px;
+  margin-top: 20px;
+  font-family: alimama;
+  font-size: 22px;
+  font-weight: 400;
+  border-radius: 4px;
+  border: 1px solid hsl(0, 0%, 0%);
+  background: none;
+  transition: 0.2s;
+  color: #474747;
+}
+input::placeholder {
+  color: #6d6d6d;
+}
+input:-webkit-autofill {
+  background: none;
+}
+input:autofill {
+  background: none;
+}
+input:focus {
+  width: 310px;
+  height: 60px;
+  border-radius: 4px;
+  border: 1px solid #fff;
+  background: none;
+  outline: none;
+  transition: 0.2s;
+}
+input::after {
+  background: none;
+}
+tbody tr td .delete {
+  color: aliceblue;
+  border-radius: 12px;
+  z-index: 9;
+  width: 90px;
+  height: 40px;
+  border: none;
+}
+tbody tr td .update {
+  margin-left: 20px;
+  color: aliceblue;
+  border-radius: 12px;
+  z-index: 9;
+  width: 90px;
+  height: 40px;
+  background-color: #2f80ed;
+  border: none;
+}
+.select {
+  width: 300px;
+  margin-top: 20px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: alimama;
+  color: #fff;
+}

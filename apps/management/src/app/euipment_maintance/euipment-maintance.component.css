@@ -1,0 +1,121 @@
+.search-box {
+  padding: 8px;
+}
+
+.search-box input {
+  width: 188px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.search-box button {
+  width: 90px;
+}
+
+.search-button {
+  margin-right: 8px;
+}
+.searchIcon {
+  font-size: 20px;
+}
+.cth {
+  padding-left: 40px;
+  height: 60px;
+  font-size: 20px;
+  user-select: none;
+}
+
+tbody tr td {
+  height: 10px;
+  font-size: 18px;
+  padding-left: 40px;
+}
+tbody tr td .delete {
+  color: aliceblue;
+  border-radius: 12px;
+  z-index: 9;
+  width: 90px;
+  height: 40px;
+  background-color: #ed556a;
+}
+tbody tr td .update {
+  margin-left: 20px;
+  color: aliceblue;
+  border-radius: 12px;
+  z-index: 9;
+  width: 90px;
+  height: 40px;
+  background-color: #2f80ed;
+}
+.sendInfo input {
+  width: 300px;
+  height: 50px;
+  padding-left: 10px;
+  border: none;
+  border-radius: 6px;
+  margin-top: 20px;
+  font-family: alimama;
+  font-size: 22px;
+  font-weight: 400;
+  border-radius: 4px;
+  border: 1px solid hsl(0, 0%, 0%);
+  background: none;
+  transition: 0.2s;
+  color: #474747;
+}
+input::placeholder {
+  color: #6d6d6d;
+}
+input:-webkit-autofill {
+  background: none;
+}
+input:autofill {
+  background: none;
+}
+input:focus {
+  width: 310px;
+  height: 60px;
+  border-radius: 4px;
+  border: 1px solid #fff;
+  background: none;
+  outline: none;
+  transition: 0.2s;
+}
+input::after {
+  background: none;
+}
+tbody tr td .delete {
+  color: aliceblue;
+  border-radius: 12px;
+  z-index: 9;
+  width: 90px;
+  height: 40px;
+  background-color: #ed556a;
+  border: none;
+}
+tbody tr td .update {
+  margin-left: 20px;
+  color: aliceblue;
+  border-radius: 12px;
+  z-index: 9;
+  width: 90px;
+  height: 40px;
+  background-color: #2f80ed;
+  border: none;
+}
+.date-picker {
+  width: 300px;
+  height: 50px;
+  padding-left: 10px;
+  border: none;
+  border-radius: 6px;
+  margin-top: 20px;
+  font-family: alimama;
+  font-size: 22px;
+  font-weight: 400;
+  border-radius: 4px;
+  border: 1px solid hsl(0, 0%, 0%);
+  background: none;
+  transition: 0.2s;
+  color: #474747;
+}

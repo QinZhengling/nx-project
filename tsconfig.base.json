@@ -14,7 +14,13 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@nx-porject/auth": ["libs/nest/auth/src/index.ts"],
+      "@nx-porject/equipment": ["libs/nest/equipment/src/index.ts"],
+      "@nx-porject/log": ["libs/nest/log/src/index.ts"],
+      "@nx-porject/role": ["libs/nest/role/src/index.ts"],
+      "@nx-porject/user": ["libs/nest/user/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

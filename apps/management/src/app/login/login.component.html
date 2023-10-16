@@ -1,0 +1,21 @@
+<div class="body">
+  <div class="bg">
+    <input
+      type="text"
+      id="account"
+      [(ngModel)]="user.account"
+      placeholder="useraccount"
+      required
+    />
+    <input
+      type="password"
+      id="password"
+      [(ngModel)]="user.password"
+      placeholder="password"
+      required
+    />
+    <button class="bt" (click)="login()">
+      <span>Login</span>
+    </button>
+  </div>
+</div>

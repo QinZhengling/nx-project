@@ -1,0 +1,179 @@
+<button nz-button nzType="primary" (click)="showModal('Add', sendInfo)">
+  <span>Add 设备</span>
+</button>
+<nz-modal
+  [(nzVisible)]="isVisible"
+  [nzTitle]="ModalTitle"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk(sendInfo)"
+  [nzOkLoading]="isOkLoading"
+>
+  <div *nzModalContent>
+    <div *ngIf="ModalTitle === 'Delete' ? true : false">
+      是否要删除设备名为{{ sendInfo.e_name }},ID为{{ sendInfo.e_id }}的用户
+    </div>
+    <div *ngIf="ModalTitle === 'Edit' ? true : false" class="sendInfo">
+      <input type="text" [(ngModel)]="sendInfo.e_id" placeholder="设备ID" />
+      <input type="text" [(ngModel)]="sendInfo.e_name" placeholder="设备名称" />
+      <input type="text" [(ngModel)]="sendInfo.e_type" placeholder="设备型号" />
+      <input
+        type="password"
+        [(ngModel)]="sendInfo.e_state"
+        placeholder="设备状态"
+      />
+
+      <nz-date-picker
+        [(ngModel)]="sendInfo.warranty_time"
+        nzFormat="yyyy-MM-dd"
+        class="date-picker"
+        [nzPlaceHolder]="'保修期'"
+      ></nz-date-picker>
+      <span>保修期</span>
+      <nz-date-picker
+        [(ngModel)]="sendInfo.in_time"
+        nzFormat="yyyy-MM-dd"
+        class="date-picker"
+        [nzPlaceHolder]="'入厂时间'"
+      ></nz-date-picker>
+      <span>入厂时间</span>
+    </div>
+    <div *ngIf="ModalTitle === 'Add' ? true : false" class="sendInfo">
+      <input type="text" [(ngModel)]="addInfo.e_id" placeholder="设备ID" />
+      <input type="text" [(ngModel)]="addInfo.e_name" placeholder="设备名称" />
+      <input type="text" [(ngModel)]="addInfo.e_type" placeholder="设备型号" />
+      <input
+        type="password"
+        [(ngModel)]="addInfo.e_state"
+        placeholder="设备状态"
+      />
+
+      <nz-date-picker
+        [(ngModel)]="addInfo.warranty_time"
+        nzFormat="yyyy-MM-dd"
+        class="date-picker"
+        [nzPlaceHolder]="'保修期'"
+      ></nz-date-picker>
+      <nz-date-picker
+        [(ngModel)]="addInfo.in_time"
+        nzFormat="yyyy-MM-dd"
+        class="date-picker"
+        [nzPlaceHolder]="'入厂时间'"
+      ></nz-date-picker>
+    </div>
+  </div>
+</nz-modal>
+<nz-table
+  #nzdata
+  [nzData]="listOfDisplayData"
+  class="Table"
+  [nzSize]="'default'"
+  [nzPaginationType]="'small'"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzPageIndex]="PageIndex"
+  [nzPageSize]="PageSize"
+  [nzFrontPagination]="false"
+  (nzPageIndexChange)="changePageIndex($event)"
+>
+  <thead>
+    <tr>
+      <th nzCustomFilter class="cth">
+        设备名称
+        <nz-filter-trigger
+          [(nzVisible)]="visible"
+          [nzActive]="searchValue.e_name.length > 0"
+          [nzDropdownMenu]="menu"
+        >
+          <span nz-icon nzType="search" class="searchIcon"></span>
+        </nz-filter-trigger>
+      </th>
+      <th class="cth">设备ID</th>
+      <th class="cth">设备型号</th>
+      <th class="cth">设备状态</th>
+      <th
+        class="cth"
+        nzShowSort
+        (nzSortOrderChange)="sortFn('in_time', $event)"
+      >
+        入厂时间
+      </th>
+      <th
+        class="cth"
+        nzShowSort
+        (nzSortOrderChange)="sortFn('warranty_time', $event)"
+      >
+        保修期
+      </th>
+      <th class="cth" [nzAlign]="'center'">相关操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of nzdata.data">
+      <td>{{ data.e_name }}</td>
+      <td>{{ data.e_id }}</td>
+      <td>{{ data.e_type }}</td>
+      <td>{{ data.e_state }}</td>
+      <td>{{ data.in_time }}</td>
+      <td>{{ data.warranty_time }}</td>
+      <td [nzAlign]="'center'">
+        <button
+          class="delete"
+          nz-button
+          nzType="primary"
+          (click)="showModal('Delete', data)"
+        >
+          Delete
+        </button>
+
+        <button
+          class="update"
+          nz-button
+          nzType="primary"
+          (click)="showModal('Edit', data)"
+        >
+          Update
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input
+        type="text"
+        nz-input
+        placeholder="Search name"
+        [(ngModel)]="searchValue.e_name"
+      />
+      <input
+        type="text"
+        nz-input
+        placeholder="Search id"
+        [(ngModel)]="searchValue.e_id"
+      />
+      <input
+        type="text"
+        nz-input
+        placeholder="Search type"
+        [(ngModel)]="searchValue.e_type"
+      />
+      <input
+        type="text"
+        nz-input
+        placeholder="Search state"
+        [(ngModel)]="searchValue.e_state"
+      />
+      <button
+        nz-button
+        nzSize="small"
+        nzType="primary"
+        (click)="search()"
+        class="search-button"
+      >
+        Search
+      </button>
+      <button nz-button nzSize="small" (click)="reset()">Reset</button>
+    </div>
+  </div>
+</nz-dropdown-menu>

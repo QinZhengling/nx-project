@@ -19,7 +19,10 @@
           "apps/management/src/favicon.ico",
           "apps/management/src/assets"
         ],
-        "styles": ["apps/management/src/styles.css"],
+        "styles": [
+          "apps/management/src/styles.css",
+          "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -59,7 +62,10 @@
           "browserTarget": "management:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/management/proxy.conf.json"
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
